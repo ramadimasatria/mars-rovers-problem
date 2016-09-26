@@ -1,22 +1,20 @@
 require_relative 'rovers.rb'
 
-puts "Input:"
+inputstr = gets.chomp
+input = []
 
-boundaries = gets.chomp
+while inputstr != '' do
+  input << inputstr
+  inputstr = gets.chomp
+end
 
-initial_state1 = gets.chomp
-instructions1 = gets.chomp
+boundaries = input[0]
+rovers = ((input.size - 1) / 2.0).ceil
 
-initial_state2 = gets.chomp
-instructions2 = gets.chomp
-
-puts "Output:"
-
-rover1 = Rover.new(boundaries, initial_state1)
-rover1.run_instructions(instructions1)
-puts rover1.get_state
-
-
-rover2 = Rover.new(boundaries, initial_state2)
-rover2.run_instructions(instructions2)
-puts rover2.get_state
+(1..rovers).each do |idx|
+  initial_state = input[(2 * idx) - 1]
+  instructions = input[2 * idx]
+  rover = Rover.new(boundaries, initial_state)
+  rover.run_instructions instructions
+  puts rover.get_state
+end
