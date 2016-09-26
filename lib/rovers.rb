@@ -2,11 +2,18 @@ class Rover
   attr_accessor :pos_x
   attr_accessor :pos_y
   attr_accessor :direction
+  attr_accessor :limit_x
+  attr_accessor :limit_y
 
-  def initialize(pos_x, pos_y, direction)
-    @pos_x = pos_x
-    @pos_y = pos_y
-    @direction = direction
+  def initialize(boundaries, initial_state)
+    boundarr = boundaries.split(' ')
+    @limit_x = boundarr[0].to_i
+    @limit_y = boundarr[1].to_i
+
+    statearr = initial_state.split(' ')
+    @pos_x = statearr[0].to_i
+    @pos_y = statearr[1].to_i
+    @direction = statearr[2]
   end
 
   def move
