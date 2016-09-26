@@ -19,6 +19,17 @@ RSpec.describe Rover do
       expect(rover.limit_x).to eq(5)
       expect(rover.limit_y).to eq(5)
     end
+
+    it 'should raise error if initial_state is invalid' do
+      expect { Rover.new(boundaries, '') }.to raise_error('Invalid starting position')
+      expect { Rover.new(boundaries, '-1 0 W') }.to raise_error('Invalid starting position')
+      expect { Rover.new(boundaries, '0 -1 W') }.to raise_error('Invalid starting position')
+      expect { Rover.new(boundaries, '0 -1') }.to raise_error('Invalid starting position')
+    end
+
+    it 'should raise error if boundaries is invalid' do
+      expect { Rover.new('-1 -1', '0 0 N') }.to raise_error('Invalid boundaries')
+    end
   end
 
   describe '#move' do

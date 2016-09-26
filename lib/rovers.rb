@@ -14,6 +14,9 @@ class Rover
     @pos_x = statearr[0].to_i
     @pos_y = statearr[1].to_i
     @direction = statearr[2]
+
+    raise 'Invalid boundaries' if !@limit_x || !@limit_y || @limit_x < 0 || @limit_y < 0
+    raise 'Invalid starting position' if !@pos_x || !@pos_y || !@direction || @pos_x < 0 || @pos_y < 0 || @pos_x > @limit_x || @pos_y > @limit_y
   end
 
   def move
