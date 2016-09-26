@@ -221,5 +221,15 @@ RSpec.describe Rover do
         expect(rover2.get_state).to eq('5 1 E')
       end
     end
+
+    context 'when given invalid step' do
+      it 'should raise error' do
+        rover = Rover.new(boundaries, '0 0 N')
+        instructions = 'MLRASD'
+        expect {
+          rover.run_instructions instructions
+        }.to raise_error('Invalid instructions')
+      end
+    end
   end
 end

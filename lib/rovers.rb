@@ -76,6 +76,9 @@ class Rover
 
   def run_instructions(instructions)
     steps = instructions.scan /\w/
-    steps.each {|s| self.run_step s}
+    steps.each do |s|
+      raise "Invalid instructions" if not 'LRM'.include?(s)
+      self.run_step s
+    end
   end
 end
