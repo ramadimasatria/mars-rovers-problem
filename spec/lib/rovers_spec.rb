@@ -30,6 +30,11 @@ RSpec.describe Rover do
         rover.move
         expect(rover.pos_y).to eq(2)
       end
+
+      it 'should throw error if target is out of bound' do
+        rover = Rover.new(boundaries, '5 5 N')
+        expect {rover.move}.to raise_error("Out of bound")
+      end
     end
 
     context 'when direction is "E"' do
@@ -37,6 +42,11 @@ RSpec.describe Rover do
         rover = Rover.new(boundaries, '1 1 E')
         rover.move
         expect(rover.pos_x).to eq(2)
+      end
+
+      it 'should throw error if target is out of bound' do
+        rover = Rover.new(boundaries, '5 5 E')
+        expect {rover.move}.to raise_error("Out of bound")
       end
     end
 
@@ -46,6 +56,11 @@ RSpec.describe Rover do
         rover.move
         expect(rover.pos_y).to eq(0)
       end
+
+      it 'should throw error if target is out of bound' do
+        rover = Rover.new(boundaries, '0 0 S')
+        expect {rover.move}.to raise_error("Out of bound")
+      end
     end
 
     context 'when direction is "W"' do
@@ -53,6 +68,11 @@ RSpec.describe Rover do
         rover = Rover.new(boundaries, '1 1 W')
         rover.move
         expect(rover.pos_x).to eq(0)
+      end
+
+      it 'should throw error if target is out of bound' do
+        rover = Rover.new(boundaries, '0 0 W')
+        expect {rover.move}.to raise_error("Out of bound")
       end
     end
   end

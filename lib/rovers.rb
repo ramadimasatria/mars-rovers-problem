@@ -27,6 +27,10 @@ class Rover
       when 'W'
         @pos_x = @pos_x - 1
     end
+
+    if @pos_y > @limit_y || @pos_y < 0 || @pos_x > @limit_x || @pos_x < 0
+      raise "Out of bound"
+    end
   end
 
   def rotate_left
