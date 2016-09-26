@@ -113,4 +113,60 @@ RSpec.describe Rover do
       end
     end
   end
+
+  describe '#get_state' do
+    it 'should return last position and direction' do
+      rover = Rover.new(0,0,'N')
+      rover.move
+      rover.move
+      rover.rotate_right
+      rover.move
+
+      expect(rover.pos_x).to eq(1)
+      expect(rover.pos_y).to eq(2)
+      expect(rover.direction).to eq('E')
+      expect(rover.get_state).to eq('1 2 E')
+    end
+  end
+
+  describe '#run_step' do
+    context 'when given step "L"' do
+      it 'should run #rotate_left method' do
+        rover = Rover.new(0, 0, 'N')
+        expect(rover).to receive(:rotate_left)
+
+        rover.run_step('L')
+      end
+    end
+
+    context 'when given step "R"' do
+      it 'should run #rotate_right method' do
+        rover = Rover.new(0, 0, 'N')
+        expect(rover).to receive(:rotate_right)
+
+        rover.run_step('R')
+      end
+    end
+
+    context 'when given step "M"' do
+      it 'should run #move method' do
+        rover = Rover.new(0, 0, 'N')
+        expect(rover).to receive(:move)
+
+        rover.run_step('M')
+      end
+    end
+  end
+
+  describe '#run_instructions' do
+    context 'when given valid set of instructions' do
+      it 'should invoke #run_step on every step' do
+        rover = Rover.new(0, 0, 'N')
+        expect(rover).to receive(:run_step).exactly(5).times
+
+        instructions = 'MMLLR'
+        rover.run_instructions instructions
+      end
+    end
+  end
 end

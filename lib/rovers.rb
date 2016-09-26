@@ -47,4 +47,24 @@ class Rover
         @direction = 'N'
     end
   end
+
+  def get_state
+    return "#{@pos_x} #{@pos_y} #{@direction}"
+  end
+
+  def run_step(step)
+    case step
+      when 'L'
+        self.rotate_left
+      when 'R'
+        self.rotate_right
+      when 'M'
+        self.move
+    end
+  end
+
+  def run_instructions(instructions)
+    steps = instructions.scan /\w/
+    steps.each {|s| self.run_step s}
+  end
 end
