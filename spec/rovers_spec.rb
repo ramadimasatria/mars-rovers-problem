@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../../lib/rovers.rb'
+require 'spec_helper'
+require_relative '../rovers'
 
 RSpec.describe Rover do
   describe '#initialize' do
